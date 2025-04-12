@@ -1,4 +1,5 @@
-let p=true;
-const server=p?'https://weatherapp-r4vv.onrender.com':'http://localhost:5173/'
+let p = true;
+const server = p ? 'https://weatherapp-r4vv.onrender.com' : 'http://localhost:5173/';
 
-export default server
+export default server;
+
