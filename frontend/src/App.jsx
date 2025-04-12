@@ -1,29 +1,30 @@
-import { useState } from "react"
-import axios from "axios"
-import SearchBar from "./components/Search-bar"
-import WeatherCard from "./components/Weather-card"
-import { Loader2 } from "lucide-react"
+import { useState } from "react";
+import axios from "axios";
+import SearchBar from "./components/Search-bar";
+import WeatherCard from "./components/Weather-card";
+import { Loader2 } from "lucide-react";
+import server from './server'; // Adjust the path if needed
 
 export default function WeatherApp() {
-  const [weatherData, setWeatherData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const searchWeather = async (location) => {
-    setLoading(true)
-    setError("")
+    setLoading(true);
+    setError("");
 
     try {
-      // Append the location directly to the URL path
-      const response = await axios.get(`http://localhost:3000/weather/${encodeURIComponent(location)}`)
-      setWeatherData(response.data)
+      // Use the `server` variable for dynamic server URL
+      const response = await axios.get(`${server}/weather/${encodeURIComponent(location)}`);
+      setWeatherData(response.data);
     } catch (err) {
-      setError("Failed to fetch weather data. Please try again.")
-      console.error("Error fetching weather:", err)
+      setError("Failed to fetch weather data. Please try again.");
+      console.error("Error fetching weather:", err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-100 to-sky-50 flex flex-col items-center p-4 sm:p-8">
@@ -50,5 +51,5 @@ export default function WeatherApp() {
         </div>
       </div>
     </div>
-  )
+  );
 }
